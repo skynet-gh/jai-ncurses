@@ -53,8 +53,12 @@ generate_bindings :: () -> bool {
   {
     using opts;
 
-    array_add(*libpaths, "lib");
-    array_add(*libnames, "libncurses");
+    #if OS == .WINDOWS {
+      array_add(*libpaths, "lib");
+    }
+
+    array_add(*libnames, "libncursesw");
+    array_add(*libnames, "libtinfo");
 
     array_add(*system_include_paths, GENERATOR_DEFAULT_SYSTEM_INCLUDE_PATH);
 
@@ -63,7 +67,7 @@ generate_bindings :: () -> bool {
     #if OS == .WINDOWS {
       array_add(*source_files, tprint("%/include/win32_curses.h", SRC_PATH));
     } else {
-      array_add(*source_files, "/usr/include/ncurses.h");
+      array_add(*source_files, "/usr/include/ncursesw/ncurses.h");
     }
 
     array_add(*extra_clang_arguments, "-v", "-x", "c");
