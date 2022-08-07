@@ -1,3 +1,5 @@
+#assert OS != .WINDOWS;
+
 #if OS != .WINDOWS {
   #import "POSIX";
   #load "unix.jai";
