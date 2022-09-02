@@ -19,6 +19,10 @@ NCURSES_MOUSE_VERSION :: 2;
 
 NCURSES_ENABLE_STDBOOL_H :: 1;
 
+exit_curses :: (unk0: s32) -> void #foreign libncursesw;
+
+curses_trace :: (unk0: u32) -> u32 #foreign libncursesw;
+
 NCURSES_OPAQUE :: 0;
 NCURSES_OPAQUE_FORM :: 0;
 NCURSES_OPAQUE_MENU :: 0;
@@ -40,6 +44,43 @@ TRUE :: 1;
 
 FALSE :: 0;
 
+mcprint_sp :: (unk0: *SCREEN, unk1: *u8, unk2: s32) -> s32 #foreign libncursesw;
+
+WA_NORMAL :: A_NORMAL;
+
+has_key_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
+
+has_key :: (unk0: s32) -> s32 #foreign libncursesw;
+
+/* other non-XSI functions */
+mcprint :: (unk0: *u8, unk1: s32) -> s32 #foreign libncursesw;
+
+mouseinterval_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
+
+mousemask_sp :: (unk0: *SCREEN, unk1: mmask_t, unk2: *mmask_t) -> mmask_t #foreign libncursesw;
+
+ungetmouse_sp :: (unk0: *SCREEN, unk1: *MEVENT) -> s32 #foreign libncursesw;
+
+getmouse_sp :: (unk0: *SCREEN, unk1: *MEVENT) -> s32 #foreign libncursesw;
+
+has_mouse_sp :: (unk0: *SCREEN) -> bool #foreign libncursesw;
+
+mouse_trafo :: (unk0: *s32, unk1: *s32, unk2: bool) -> bool #foreign libncursesw;
+
+wmouse_trafo :: (unk0: *WINDOW, unk1: *s32, unk2: *s32, unk3: bool) -> bool #foreign libncursesw;
+
+mouseinterval :: (unk0: s32) -> s32 #foreign libncursesw;
+
+wenclose :: (unk0: *WINDOW, unk1: s32, unk2: s32) -> bool #foreign libncursesw;
+
+mousemask :: (unk0: mmask_t, unk1: *mmask_t) -> mmask_t #foreign libncursesw;
+
+ungetmouse :: (unk0: *MEVENT) -> s32 #foreign libncursesw;
+
+getmouse :: (unk0: *MEVENT) -> s32 #foreign libncursesw;
+
+has_mouse :: () -> bool #foreign libncursesw;
+
 COLOR_BLACK :: 0;
 COLOR_RED :: 1;
 COLOR_GREEN :: 2;
@@ -48,6 +89,76 @@ COLOR_BLUE :: 4;
 COLOR_MAGENTA :: 5;
 COLOR_CYAN :: 6;
 COLOR_WHITE :: 7;
+
+MEVENT :: struct {
+    id:     s16; /* ID to distinguish multiple devices */
+    x:      s32; /* event coordinates (character-cell) */
+    y:      s32; /* event coordinates (character-cell) */
+    z:      s32; /* event coordinates (character-cell) */
+    bstate: mmask_t; /* button state bits */
+}
+
+use_legacy_coding_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
+
+use_default_colors_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+set_tabsize_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
+
+set_escdelay_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
+
+resizeterm_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
+
+resize_term_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
+
+reset_color_pairs_sp :: (unk0: *SCREEN) -> void #foreign libncursesw;
+
+nofilter_sp :: (unk0: *SCREEN) -> void #foreign libncursesw;
+
+keyok_sp :: (unk0: *SCREEN, unk1: s32, unk2: bool) -> s32 #foreign libncursesw;
+
+key_defined_sp :: (unk0: *SCREEN, unk1: *u8) -> s32 #foreign libncursesw;
+
+is_term_resized_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32) -> bool #foreign libncursesw;
+
+init_extended_pair_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32, unk3: s32) -> s32 #foreign libncursesw;
+
+init_extended_color_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32, unk3: s32, unk4: s32) -> s32 #foreign libncursesw;
+
+free_pair_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
+
+find_pair_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
+
+get_escdelay_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+extended_slk_color_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
+
+extended_pair_content_sp :: (unk0: *SCREEN, unk1: s32, unk2: *s32, unk3: *s32) -> s32 #foreign libncursesw;
+
+extended_color_content_sp :: (unk0: *SCREEN, unk1: s32, unk2: *s32, unk3: *s32, unk4: *s32) -> s32 #foreign libncursesw;
+
+define_key_sp :: (unk0: *SCREEN, unk1: *u8, unk2: s32) -> s32 #foreign libncursesw;
+
+assume_default_colors_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
+
+alloc_pair_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
+
+keybound_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32) -> *u8 #foreign libncursesw;
+
+vidputs_sp :: (unk0: *SCREEN, unk1: chtype, unk2: NCURSES_OUTC_sp) -> s32 #foreign libncursesw;
+
+vidattr_sp :: (unk0: *SCREEN, unk1: chtype) -> s32 #foreign libncursesw;
+
+use_tioctl_sp :: (unk0: *SCREEN, unk1: bool) -> void #foreign libncursesw;
+
+use_env_sp :: (unk0: *SCREEN, unk1: bool) -> void #foreign libncursesw;
+
+ungetch_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
+
+typeahead_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
+
+termname_sp :: (unk0: *SCREEN) -> *u8 #foreign libncursesw;
+
+termattrs_sp :: (unk0: *SCREEN) -> chtype #foreign libncursesw;
 
 ERR :: -1;
 
@@ -69,9 +180,325 @@ NCURSES_EXT_FUNCS :: 20211021;
 
 NCURSES_SP_FUNCS :: 20211021;
 
+start_color_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
 NCURSES_ATTR_SHIFT :: 8;
 
+A_NORMAL :: 1 - 1;
+
+slk_touch_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+slk_set_sp :: (unk0: *SCREEN, unk1: s32, unk2: *u8, unk3: s32) -> s32 #foreign libncursesw;
+
+slk_restore_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+slk_refresh_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+slk_noutrefresh_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+slk_label_sp :: (unk0: *SCREEN, unk1: s32) -> *u8 #foreign libncursesw;
+
+slk_init_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
+
+slk_color_sp :: (unk0: *SCREEN, unk1: s16) -> s32 #foreign libncursesw;
+
+slk_clear_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+slk_attr_set_sp :: (unk0: *SCREEN, unk1: attr_t, unk2: s16, unk3: *void) -> s32 #foreign libncursesw;
+
+slk_attr_sp :: (unk0: *SCREEN) -> attr_t #foreign libncursesw;
+
+slk_attrset_sp :: (unk0: *SCREEN, unk1: chtype) -> s32 #foreign libncursesw;
+
+slk_attron_sp :: (unk0: *SCREEN, unk1: chtype) -> s32 #foreign libncursesw;
+
+slk_attroff_sp :: (unk0: *SCREEN, unk1: chtype) -> s32 #foreign libncursesw;
+
+scr_set_sp :: (unk0: *SCREEN, unk1: *u8) -> s32 #foreign libncursesw;
+
+scr_restore_sp :: (unk0: *SCREEN, unk1: *u8) -> s32 #foreign libncursesw;
+
+scr_init_sp :: (unk0: *SCREEN, unk1: *u8) -> s32 #foreign libncursesw;
+
+savetty_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+ripoffline_sp :: (unk0: *SCREEN, unk1: s32, unk2: #type (a0: *WINDOW, a1: s32) -> s32 #c_call) -> s32 #foreign libncursesw;
+
+resetty_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+reset_shell_mode_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+reset_prog_mode_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+raw_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+qiflush_sp :: (unk0: *SCREEN) -> void #foreign libncursesw;
+
+pair_content_sp :: (unk0: *SCREEN, unk1: s16, unk2: *s16, unk3: *s16) -> s32 #foreign libncursesw;
+
+noraw_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+noqiflush_sp :: (unk0: *SCREEN) -> void #foreign libncursesw;
+
+nonl_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+noecho_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+nocbreak_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+nl_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+newwin_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32, unk3: s32, unk4: s32) -> *WINDOW #foreign libncursesw;
+
+newterm_sp :: (unk0: *SCREEN, unk1: *u8, unk2: *FILE, unk3: *FILE) -> *SCREEN #foreign libncursesw;
+
+newpad_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32) -> *WINDOW #foreign libncursesw;
+
+napms_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
+
+mvcur_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32, unk3: s32, unk4: s32) -> s32 #foreign libncursesw;
+
+longname_sp :: (unk0: *SCREEN) -> *u8 #foreign libncursesw;
+
+killchar_sp :: (unk0: *SCREEN) -> u8 #foreign libncursesw;
+
+keyname_sp :: (unk0: *SCREEN, unk1: s32) -> *u8 #foreign libncursesw;
+
+isendwin_sp :: (unk0: *SCREEN) -> bool #foreign libncursesw;
+
+intrflush_sp :: (unk0: *SCREEN, unk1: *WINDOW, unk2: bool) -> s32 #foreign libncursesw;
+
+init_pair_sp :: (unk0: *SCREEN, unk1: s16, unk2: s16, unk3: s16) -> s32 #foreign libncursesw;
+
+init_color_sp :: (unk0: *SCREEN, unk1: s16, unk2: s16, unk3: s16, unk4: s16) -> s32 #foreign libncursesw;
+
+has_il_sp :: (unk0: *SCREEN) -> bool #foreign libncursesw;
+
+has_ic_sp :: (unk0: *SCREEN) -> bool #foreign libncursesw;
+
+has_colors_sp :: (unk0: *SCREEN) -> bool #foreign libncursesw;
+
+halfdelay_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
+
+getwin_sp :: (unk0: *SCREEN, unk1: *FILE) -> *WINDOW #foreign libncursesw;
+
+flushinp_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+flash_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+filter_sp :: (unk0: *SCREEN) -> void #foreign libncursesw;
+
+erasechar_sp :: (unk0: *SCREEN) -> u8 #foreign libncursesw;
+
+endwin_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+echo_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+doupdate_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+delay_output_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
+
+def_shell_mode_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+def_prog_mode_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+color_content_sp :: (unk0: *SCREEN, unk1: s16, unk2: *s16, unk3: *s16, unk4: *s16) -> s32 #foreign libncursesw;
+
+curs_set_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
+
+cbreak_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+can_change_color_sp :: (unk0: *SCREEN) -> bool #foreign libncursesw;
+
+beep_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+baudrate_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
+
+new_prescr :: () -> *SCREEN #foreign libncursesw;
+
+NCURSES_OUTC_sp :: #type (a0: *SCREEN, a1: s32) -> s32 #c_call;
+
+wgetscrreg :: (unk0: *WINDOW, unk1: *s32, unk2: *s32) -> s32 #foreign libncursesw;
+
+wgetdelay :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
+
+is_syncok :: (unk0: *WINDOW) -> bool #foreign libncursesw;
+
+is_subwin :: (unk0: *WINDOW) -> bool #foreign libncursesw;
+
+is_scrollok :: (unk0: *WINDOW) -> bool #foreign libncursesw;
+
+is_pad :: (unk0: *WINDOW) -> bool #foreign libncursesw;
+
+is_notimeout :: (unk0: *WINDOW) -> bool #foreign libncursesw;
+
+is_nodelay :: (unk0: *WINDOW) -> bool #foreign libncursesw;
+
+is_leaveok :: (unk0: *WINDOW) -> bool #foreign libncursesw;
+
+is_keypad :: (unk0: *WINDOW) -> bool #foreign libncursesw;
+
+is_immedok :: (unk0: *WINDOW) -> bool #foreign libncursesw;
+
+is_idlok :: (unk0: *WINDOW) -> bool #foreign libncursesw;
+
+is_idcok :: (unk0: *WINDOW) -> bool #foreign libncursesw;
+
+is_cleared :: (unk0: *WINDOW) -> bool #foreign libncursesw;
+
+/*
+* These extensions provide access to information stored in the WINDOW even
+* when NCURSES_OPAQUE is set:
+*/
+wgetparent :: (unk0: *WINDOW) -> *WINDOW #foreign libncursesw;
+
+nofilter :: () -> void #foreign libncursesw;
+
+wresize :: (unk0: *WINDOW, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
+
+use_window :: (unk0: *WINDOW, unk1: NCURSES_WINDOW_CB, unk2: *void) -> s32 #foreign libncursesw;
+
+use_screen :: (unk0: *SCREEN, unk1: NCURSES_SCREEN_CB, unk2: *void) -> s32 #foreign libncursesw;
+
+use_legacy_coding :: (unk0: s32) -> s32 #foreign libncursesw;
+
+use_extended_names :: (unk0: bool) -> s32 #foreign libncursesw;
+
+use_default_colors :: () -> s32 #foreign libncursesw;
+
+set_tabsize :: (unk0: s32) -> s32 #foreign libncursesw;
+
+set_escdelay :: (unk0: s32) -> s32 #foreign libncursesw;
+
+resizeterm :: (unk0: s32, unk1: s32) -> s32 #foreign libncursesw;
+
+resize_term :: (unk0: s32, unk1: s32) -> s32 #foreign libncursesw;
+
+reset_color_pairs :: () -> void #foreign libncursesw;
+
+keyok :: (unk0: s32, unk1: bool) -> s32 #foreign libncursesw;
+
+key_defined :: (unk0: *u8) -> s32 #foreign libncursesw;
+
+init_extended_pair :: (unk0: s32, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
+
+init_extended_color :: (unk0: s32, unk1: s32, unk2: s32, unk3: s32) -> s32 #foreign libncursesw;
+
+get_escdelay :: () -> s32 #foreign libncursesw;
+
+free_pair :: (unk0: s32) -> s32 #foreign libncursesw;
+
+find_pair :: (unk0: s32, unk1: s32) -> s32 #foreign libncursesw;
+
+extended_slk_color :: (unk0: s32) -> s32 #foreign libncursesw;
+
+extended_pair_content :: (unk0: s32, unk1: *s32, unk2: *s32) -> s32 #foreign libncursesw;
+
+extended_color_content :: (unk0: s32, unk1: *s32, unk2: *s32, unk3: *s32) -> s32 #foreign libncursesw;
+
+define_key :: (unk0: *u8, unk1: s32) -> s32 #foreign libncursesw;
+
+assume_default_colors :: (unk0: s32, unk1: s32) -> s32 #foreign libncursesw;
+
+alloc_pair :: (unk0: s32, unk1: s32) -> s32 #foreign libncursesw;
+
+curses_version :: () -> *u8 #foreign libncursesw;
+
+keybound :: (unk0: s32, unk1: s32) -> *u8 #foreign libncursesw;
+
+is_term_resized :: (unk0: s32, unk1: s32) -> bool #foreign libncursesw;
+
+NCURSES_SCREEN_CB :: #type (a0: *SCREEN, a1: *void) -> s32 #c_call;
+
+NCURSES_WINDOW_CB :: #type (a0: *WINDOW, a1: *void) -> s32 #c_call;
+
+getpary :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
+
+getparx :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
+
 _XOPEN_CURSES :: 1;
+
+getmaxy :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
+
+getmaxx :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
+
+getbegy :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
+
+getbegx :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
+
+getcury :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
+
+getcurx :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
+
+/*
+* These functions are not in X/Open, but we use them in macro definitions:
+*/
+getattrs :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
+
+tiparm :: (unk0: *u8, __args: ..Any) -> *u8 #foreign libncursesw;
+
+tparm :: (unk0: *u8, __args: ..Any) -> *u8 #foreign libncursesw;
+
+putp :: (unk0: *u8) -> s32 #foreign libncursesw;
+
+tigetstr :: (unk0: *u8) -> *u8 #foreign libncursesw;
+
+tigetnum :: (unk0: *u8) -> s32 #foreign libncursesw;
+
+/*
+* These are also declared in <term.h>:
+*/
+tigetflag :: (unk0: *u8) -> s32 #foreign libncursesw;
+
+wvline :: (unk0: *WINDOW, unk1: chtype, unk2: s32) -> s32 #foreign libncursesw;
+
+wtouchln :: (unk0: *WINDOW, unk1: s32, unk2: s32, unk3: s32) -> s32 #foreign libncursesw;
+
+wtimeout :: (unk0: *WINDOW, unk1: s32) -> void #foreign libncursesw;
+
+wsyncup :: (unk0: *WINDOW) -> void #foreign libncursesw;
+
+wsyncdown :: (unk0: *WINDOW) -> void #foreign libncursesw;
+
+wstandend :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
+
+wstandout :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
+
+wsetscrreg :: (unk0: *WINDOW, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
+
+wscrl :: (unk0: *WINDOW, unk1: s32) -> s32 #foreign libncursesw;
+
+wscanw :: (unk0: *WINDOW, unk1: *u8, __args: ..Any) -> s32 #foreign libncursesw;
+
+wrefresh :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
+
+wredrawln :: (unk0: *WINDOW, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
+
+wprintw :: (unk0: *WINDOW, unk1: *u8, __args: ..Any) -> s32 #foreign libncursesw;
+
+wnoutrefresh :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
+
+wmove :: (unk0: *WINDOW, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
+
+winstr :: (unk0: *WINDOW, unk1: *u8) -> s32 #foreign libncursesw;
+
+winsstr :: (unk0: *WINDOW, unk1: *u8) -> s32 #foreign libncursesw;
+
+winsnstr :: (unk0: *WINDOW, unk1: *u8, unk2: s32) -> s32 #foreign libncursesw;
+
+winsertln :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
+
+winsdelln :: (unk0: *WINDOW, unk1: s32) -> s32 #foreign libncursesw;
+
+winsch :: (unk0: *WINDOW, unk1: chtype) -> s32 #foreign libncursesw;
+
+winnstr :: (unk0: *WINDOW, unk1: *u8, unk2: s32) -> s32 #foreign libncursesw;
+
+winchstr :: (unk0: *WINDOW, unk1: *chtype) -> s32 #foreign libncursesw;
+
+winchnstr :: (unk0: *WINDOW, unk1: *chtype, unk2: s32) -> s32 #foreign libncursesw;
+
+winch :: (unk0: *WINDOW) -> chtype #foreign libncursesw;
 
 TRACE_DISABLE :: 0x0000;
 TRACE_TIMES :: 0x0001;
@@ -90,6 +517,7 @@ TRACE_DATABASE :: 0x0800;
 TRACE_ATTRS :: 0x1000;
 
 TRACE_SHIFT :: 13;
+TRACE_MAXIMUM :: (1 << TRACE_SHIFT) - 1;
 
 chtype :: u32;
 mmask_t :: u32;
@@ -409,245 +837,6 @@ wgetch :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
 wgetnstr :: (unk0: *WINDOW, unk1: *u8, unk2: s32) -> s32 #foreign libncursesw;
 wgetstr :: (unk0: *WINDOW, unk1: *u8) -> s32 #foreign libncursesw;
 whline :: (unk0: *WINDOW, unk1: chtype, unk2: s32) -> s32 #foreign libncursesw;
-winch :: (unk0: *WINDOW) -> chtype #foreign libncursesw;
-winchnstr :: (unk0: *WINDOW, unk1: *chtype, unk2: s32) -> s32 #foreign libncursesw;
-winchstr :: (unk0: *WINDOW, unk1: *chtype) -> s32 #foreign libncursesw;
-winnstr :: (unk0: *WINDOW, unk1: *u8, unk2: s32) -> s32 #foreign libncursesw;
-winsch :: (unk0: *WINDOW, unk1: chtype) -> s32 #foreign libncursesw;
-winsdelln :: (unk0: *WINDOW, unk1: s32) -> s32 #foreign libncursesw;
-winsertln :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
-winsnstr :: (unk0: *WINDOW, unk1: *u8, unk2: s32) -> s32 #foreign libncursesw;
-winsstr :: (unk0: *WINDOW, unk1: *u8) -> s32 #foreign libncursesw;
-winstr :: (unk0: *WINDOW, unk1: *u8) -> s32 #foreign libncursesw;
-wmove :: (unk0: *WINDOW, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
-wnoutrefresh :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
-wprintw :: (unk0: *WINDOW, unk1: *u8, __args: ..Any) -> s32 #foreign libncursesw;
-
-wredrawln :: (unk0: *WINDOW, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
-wrefresh :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
-wscanw :: (unk0: *WINDOW, unk1: *u8, __args: ..Any) -> s32 #foreign libncursesw;
-
-wscrl :: (unk0: *WINDOW, unk1: s32) -> s32 #foreign libncursesw;
-wsetscrreg :: (unk0: *WINDOW, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
-wstandout :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
-wstandend :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
-wsyncdown :: (unk0: *WINDOW) -> void #foreign libncursesw;
-wsyncup :: (unk0: *WINDOW) -> void #foreign libncursesw;
-wtimeout :: (unk0: *WINDOW, unk1: s32) -> void #foreign libncursesw;
-wtouchln :: (unk0: *WINDOW, unk1: s32, unk2: s32, unk3: s32) -> s32 #foreign libncursesw;
-wvline :: (unk0: *WINDOW, unk1: chtype, unk2: s32) -> s32 #foreign libncursesw;
-
-/*
-* These are also declared in <term.h>:
-*/
-tigetflag :: (unk0: *u8) -> s32 #foreign libncursesw;
-tigetnum :: (unk0: *u8) -> s32 #foreign libncursesw;
-tigetstr :: (unk0: *u8) -> *u8 #foreign libncursesw;
-putp :: (unk0: *u8) -> s32 #foreign libncursesw;
-
-tparm :: (unk0: *u8, __args: ..Any) -> *u8 #foreign libncursesw;
-
-tiparm :: (unk0: *u8, __args: ..Any) -> *u8 #foreign libncursesw;
-
-/*
-* These functions are not in X/Open, but we use them in macro definitions:
-*/
-getattrs :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
-getcurx :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
-getcury :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
-getbegx :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
-getbegy :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
-getmaxx :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
-getmaxy :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
-getparx :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
-getpary :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
-
-NCURSES_WINDOW_CB :: #type (a0: *WINDOW, a1: *void) -> s32 #c_call;
-NCURSES_SCREEN_CB :: #type (a0: *SCREEN, a1: *void) -> s32 #c_call;
-is_term_resized :: (unk0: s32, unk1: s32) -> bool #foreign libncursesw;
-keybound :: (unk0: s32, unk1: s32) -> *u8 #foreign libncursesw;
-curses_version :: () -> *u8 #foreign libncursesw;
-alloc_pair :: (unk0: s32, unk1: s32) -> s32 #foreign libncursesw;
-assume_default_colors :: (unk0: s32, unk1: s32) -> s32 #foreign libncursesw;
-define_key :: (unk0: *u8, unk1: s32) -> s32 #foreign libncursesw;
-extended_color_content :: (unk0: s32, unk1: *s32, unk2: *s32, unk3: *s32) -> s32 #foreign libncursesw;
-extended_pair_content :: (unk0: s32, unk1: *s32, unk2: *s32) -> s32 #foreign libncursesw;
-extended_slk_color :: (unk0: s32) -> s32 #foreign libncursesw;
-find_pair :: (unk0: s32, unk1: s32) -> s32 #foreign libncursesw;
-free_pair :: (unk0: s32) -> s32 #foreign libncursesw;
-get_escdelay :: () -> s32 #foreign libncursesw;
-init_extended_color :: (unk0: s32, unk1: s32, unk2: s32, unk3: s32) -> s32 #foreign libncursesw;
-init_extended_pair :: (unk0: s32, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
-key_defined :: (unk0: *u8) -> s32 #foreign libncursesw;
-keyok :: (unk0: s32, unk1: bool) -> s32 #foreign libncursesw;
-reset_color_pairs :: () -> void #foreign libncursesw;
-resize_term :: (unk0: s32, unk1: s32) -> s32 #foreign libncursesw;
-resizeterm :: (unk0: s32, unk1: s32) -> s32 #foreign libncursesw;
-set_escdelay :: (unk0: s32) -> s32 #foreign libncursesw;
-set_tabsize :: (unk0: s32) -> s32 #foreign libncursesw;
-use_default_colors :: () -> s32 #foreign libncursesw;
-use_extended_names :: (unk0: bool) -> s32 #foreign libncursesw;
-use_legacy_coding :: (unk0: s32) -> s32 #foreign libncursesw;
-use_screen :: (unk0: *SCREEN, unk1: NCURSES_SCREEN_CB, unk2: *void) -> s32 #foreign libncursesw;
-use_window :: (unk0: *WINDOW, unk1: NCURSES_WINDOW_CB, unk2: *void) -> s32 #foreign libncursesw;
-wresize :: (unk0: *WINDOW, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
-nofilter :: () -> void #foreign libncursesw;
-
-/*
-* These extensions provide access to information stored in the WINDOW even
-* when NCURSES_OPAQUE is set:
-*/
-wgetparent :: (unk0: *WINDOW) -> *WINDOW #foreign libncursesw;
-is_cleared :: (unk0: *WINDOW) -> bool #foreign libncursesw;
-is_idcok :: (unk0: *WINDOW) -> bool #foreign libncursesw;
-is_idlok :: (unk0: *WINDOW) -> bool #foreign libncursesw;
-is_immedok :: (unk0: *WINDOW) -> bool #foreign libncursesw;
-is_keypad :: (unk0: *WINDOW) -> bool #foreign libncursesw;
-is_leaveok :: (unk0: *WINDOW) -> bool #foreign libncursesw;
-is_nodelay :: (unk0: *WINDOW) -> bool #foreign libncursesw;
-is_notimeout :: (unk0: *WINDOW) -> bool #foreign libncursesw;
-is_pad :: (unk0: *WINDOW) -> bool #foreign libncursesw;
-is_scrollok :: (unk0: *WINDOW) -> bool #foreign libncursesw;
-is_subwin :: (unk0: *WINDOW) -> bool #foreign libncursesw;
-is_syncok :: (unk0: *WINDOW) -> bool #foreign libncursesw;
-wgetdelay :: (unk0: *WINDOW) -> s32 #foreign libncursesw;
-wgetscrreg :: (unk0: *WINDOW, unk1: *s32, unk2: *s32) -> s32 #foreign libncursesw;
-
-NCURSES_OUTC_sp :: #type (a0: *SCREEN, a1: s32) -> s32 #c_call;
-
-new_prescr :: () -> *SCREEN #foreign libncursesw;
-
-baudrate_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-beep_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-can_change_color_sp :: (unk0: *SCREEN) -> bool #foreign libncursesw;
-cbreak_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-curs_set_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
-color_content_sp :: (unk0: *SCREEN, unk1: s16, unk2: *s16, unk3: *s16, unk4: *s16) -> s32 #foreign libncursesw;
-def_prog_mode_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-def_shell_mode_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-delay_output_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
-doupdate_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-echo_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-endwin_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-erasechar_sp :: (unk0: *SCREEN) -> u8 #foreign libncursesw;
-filter_sp :: (unk0: *SCREEN) -> void #foreign libncursesw;
-flash_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-flushinp_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-getwin_sp :: (unk0: *SCREEN, unk1: *FILE) -> *WINDOW #foreign libncursesw;
-halfdelay_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
-has_colors_sp :: (unk0: *SCREEN) -> bool #foreign libncursesw;
-has_ic_sp :: (unk0: *SCREEN) -> bool #foreign libncursesw;
-has_il_sp :: (unk0: *SCREEN) -> bool #foreign libncursesw;
-init_color_sp :: (unk0: *SCREEN, unk1: s16, unk2: s16, unk3: s16, unk4: s16) -> s32 #foreign libncursesw;
-init_pair_sp :: (unk0: *SCREEN, unk1: s16, unk2: s16, unk3: s16) -> s32 #foreign libncursesw;
-intrflush_sp :: (unk0: *SCREEN, unk1: *WINDOW, unk2: bool) -> s32 #foreign libncursesw;
-isendwin_sp :: (unk0: *SCREEN) -> bool #foreign libncursesw;
-keyname_sp :: (unk0: *SCREEN, unk1: s32) -> *u8 #foreign libncursesw;
-killchar_sp :: (unk0: *SCREEN) -> u8 #foreign libncursesw;
-longname_sp :: (unk0: *SCREEN) -> *u8 #foreign libncursesw;
-mvcur_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32, unk3: s32, unk4: s32) -> s32 #foreign libncursesw;
-napms_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
-newpad_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32) -> *WINDOW #foreign libncursesw;
-newterm_sp :: (unk0: *SCREEN, unk1: *u8, unk2: *FILE, unk3: *FILE) -> *SCREEN #foreign libncursesw;
-newwin_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32, unk3: s32, unk4: s32) -> *WINDOW #foreign libncursesw;
-nl_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-nocbreak_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-noecho_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-nonl_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-noqiflush_sp :: (unk0: *SCREEN) -> void #foreign libncursesw;
-noraw_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-pair_content_sp :: (unk0: *SCREEN, unk1: s16, unk2: *s16, unk3: *s16) -> s32 #foreign libncursesw;
-qiflush_sp :: (unk0: *SCREEN) -> void #foreign libncursesw;
-raw_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-reset_prog_mode_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-reset_shell_mode_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-resetty_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-ripoffline_sp :: (unk0: *SCREEN, unk1: s32, unk2: #type (a0: *WINDOW, a1: s32) -> s32 #c_call) -> s32 #foreign libncursesw;
-savetty_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-scr_init_sp :: (unk0: *SCREEN, unk1: *u8) -> s32 #foreign libncursesw;
-scr_restore_sp :: (unk0: *SCREEN, unk1: *u8) -> s32 #foreign libncursesw;
-scr_set_sp :: (unk0: *SCREEN, unk1: *u8) -> s32 #foreign libncursesw;
-slk_attroff_sp :: (unk0: *SCREEN, unk1: chtype) -> s32 #foreign libncursesw;
-slk_attron_sp :: (unk0: *SCREEN, unk1: chtype) -> s32 #foreign libncursesw;
-slk_attrset_sp :: (unk0: *SCREEN, unk1: chtype) -> s32 #foreign libncursesw;
-slk_attr_sp :: (unk0: *SCREEN) -> attr_t #foreign libncursesw;
-slk_attr_set_sp :: (unk0: *SCREEN, unk1: attr_t, unk2: s16, unk3: *void) -> s32 #foreign libncursesw;
-slk_clear_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-slk_color_sp :: (unk0: *SCREEN, unk1: s16) -> s32 #foreign libncursesw;
-slk_init_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
-slk_label_sp :: (unk0: *SCREEN, unk1: s32) -> *u8 #foreign libncursesw;
-slk_noutrefresh_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-slk_refresh_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-slk_restore_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-slk_set_sp :: (unk0: *SCREEN, unk1: s32, unk2: *u8, unk3: s32) -> s32 #foreign libncursesw;
-slk_touch_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-start_color_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-termattrs_sp :: (unk0: *SCREEN) -> chtype #foreign libncursesw;
-termname_sp :: (unk0: *SCREEN) -> *u8 #foreign libncursesw;
-typeahead_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
-ungetch_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
-use_env_sp :: (unk0: *SCREEN, unk1: bool) -> void #foreign libncursesw;
-use_tioctl_sp :: (unk0: *SCREEN, unk1: bool) -> void #foreign libncursesw;
-vidattr_sp :: (unk0: *SCREEN, unk1: chtype) -> s32 #foreign libncursesw;
-vidputs_sp :: (unk0: *SCREEN, unk1: chtype, unk2: NCURSES_OUTC_sp) -> s32 #foreign libncursesw;
-
-keybound_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32) -> *u8 #foreign libncursesw;
-alloc_pair_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
-assume_default_colors_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
-define_key_sp :: (unk0: *SCREEN, unk1: *u8, unk2: s32) -> s32 #foreign libncursesw;
-extended_color_content_sp :: (unk0: *SCREEN, unk1: s32, unk2: *s32, unk3: *s32, unk4: *s32) -> s32 #foreign libncursesw;
-extended_pair_content_sp :: (unk0: *SCREEN, unk1: s32, unk2: *s32, unk3: *s32) -> s32 #foreign libncursesw;
-extended_slk_color_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
-get_escdelay_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-find_pair_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
-free_pair_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
-init_extended_color_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32, unk3: s32, unk4: s32) -> s32 #foreign libncursesw;
-init_extended_pair_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32, unk3: s32) -> s32 #foreign libncursesw;
-is_term_resized_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32) -> bool #foreign libncursesw;
-key_defined_sp :: (unk0: *SCREEN, unk1: *u8) -> s32 #foreign libncursesw;
-keyok_sp :: (unk0: *SCREEN, unk1: s32, unk2: bool) -> s32 #foreign libncursesw;
-nofilter_sp :: (unk0: *SCREEN) -> void #foreign libncursesw;
-reset_color_pairs_sp :: (unk0: *SCREEN) -> void #foreign libncursesw;
-resize_term_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
-resizeterm_sp :: (unk0: *SCREEN, unk1: s32, unk2: s32) -> s32 #foreign libncursesw;
-set_escdelay_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
-set_tabsize_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
-use_default_colors_sp :: (unk0: *SCREEN) -> s32 #foreign libncursesw;
-use_legacy_coding_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
-
-MEVENT :: struct {
-    id:     s16; /* ID to distinguish multiple devices */
-    x:      s32; /* event coordinates (character-cell) */
-    y:      s32; /* event coordinates (character-cell) */
-    z:      s32; /* event coordinates (character-cell) */
-    bstate: mmask_t; /* button state bits */
-}
-
-has_mouse :: () -> bool #foreign libncursesw;
-getmouse :: (unk0: *MEVENT) -> s32 #foreign libncursesw;
-ungetmouse :: (unk0: *MEVENT) -> s32 #foreign libncursesw;
-mousemask :: (unk0: mmask_t, unk1: *mmask_t) -> mmask_t #foreign libncursesw;
-wenclose :: (unk0: *WINDOW, unk1: s32, unk2: s32) -> bool #foreign libncursesw;
-mouseinterval :: (unk0: s32) -> s32 #foreign libncursesw;
-wmouse_trafo :: (unk0: *WINDOW, unk1: *s32, unk2: *s32, unk3: bool) -> bool #foreign libncursesw;
-mouse_trafo :: (unk0: *s32, unk1: *s32, unk2: bool) -> bool #foreign libncursesw;
-
-has_mouse_sp :: (unk0: *SCREEN) -> bool #foreign libncursesw;
-getmouse_sp :: (unk0: *SCREEN, unk1: *MEVENT) -> s32 #foreign libncursesw;
-ungetmouse_sp :: (unk0: *SCREEN, unk1: *MEVENT) -> s32 #foreign libncursesw;
-mousemask_sp :: (unk0: *SCREEN, unk1: mmask_t, unk2: *mmask_t) -> mmask_t #foreign libncursesw;
-mouseinterval_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
-
-/* other non-XSI functions */
-mcprint :: (unk0: *u8, unk1: s32) -> s32 #foreign libncursesw;
-has_key :: (unk0: s32) -> s32 #foreign libncursesw;
-
-has_key_sp :: (unk0: *SCREEN, unk1: s32) -> s32 #foreign libncursesw;
-mcprint_sp :: (unk0: *SCREEN, unk1: *u8, unk2: s32) -> s32 #foreign libncursesw;
-
-curses_trace :: (unk0: u32) -> u32 #foreign libncursesw;
-
-exit_curses :: (unk0: s32) -> void #foreign libncursesw;
 
 #scope_file
 
